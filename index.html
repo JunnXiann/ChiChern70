@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PDF Flipbook with Audio</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <div id="flipbook-container">
+    <div id="flipbook"></div>
+  </div>
+
+  <audio id="audio-player" controls style="display: none;"></audio>
+
+  <script src="pdfjs/pdf.js"></script>
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs/pdf.worker.js';
+  </script>
+  <script src="main.js"></script>
+</body>
+</html>
