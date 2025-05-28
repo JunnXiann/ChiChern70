@@ -38,6 +38,7 @@ let flipping = false;
 
 function renderCurrentPage(direction = 'none') {
   if (flipping) return;
+  audioPlayer.pause();
   flipping = true;
 
   const wrapper = document.createElement('div');
@@ -45,16 +46,25 @@ function renderCurrentPage(direction = 'none') {
 
   const page = pages[currentIndex];
   const img = page.image.cloneNode();
-  const soundBtn = document.createElement('button');
-  soundBtn.className = 'sound-button';
-  soundBtn.innerText = '🎵';
-  soundBtn.onclick = () => {
-    audioPlayer.src = page.audio;
-    audioPlayer.play();
-  };
 
   wrapper.appendChild(img);
-  wrapper.appendChild(soundBtn);
+
+  if (currentIndex >= 5 && currentIndex <= 20) {
+    const soundBtn = document.createElement('button');
+    soundBtn.className = 'sound-button';
+    soundBtn.innerText = '🎵';
+    soundBtn.onclick = (e) => {
+      e.stopPropagation();
+      if (!audioPlayer.paused && audioPlayer.src.includes(page.audio)) {
+        audioPlayer.pause();
+      } else {
+        // Otherwise, play this page's audio
+        audioPlayer.src = page.audio;
+        audioPlayer.play();
+  }
+    };
+    wrapper.appendChild(soundBtn);
+  }
 
   // clear previous and add new
   container.innerHTML = '';
@@ -74,6 +84,15 @@ function renderCurrentPage(direction = 'none') {
 
   setTimeout(() => {
     flipping = false;
+    const page = pages[currentIndex];
+    if (currentIndex >= 5 && currentIndex <= 19 && page.audio) {
+        audioPlayer.src = page.audio;
+        audioPlayer.play();
+    } else {
+        // Stop audio when out of range
+        audioPlayer.pause();
+        audioPlayer.src = '';
+    }
   }, 600); // match your transition duration
 }
 
