@@ -32,6 +32,7 @@ async function renderPDF() {
   }
 
   renderCurrentPage();
+  document.getElementById('loading-screen').style.display = 'none';
 }
 
 let flipping = false;

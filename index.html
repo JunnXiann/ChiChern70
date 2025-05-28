@@ -7,6 +7,19 @@
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
+  <div id="loading-screen" style="
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    z-index: 9999;">
+    <div class="spinner"></div>
+  </div>
   <div id="flipbook-container">
     <div id="flipbook"></div>
   </div>
