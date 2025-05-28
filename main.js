@@ -158,9 +158,6 @@ function handleSwipe() {
   }
 }
 
-
-// renderPDF();
-
 function setupClickZones() {
   const leftZone = document.createElement('div');
   const rightZone = document.createElement('div');
@@ -187,14 +184,55 @@ function setupClickZones() {
 }
 
 renderPDF().then(setupClickZones);
+document.getElementById('fullscreen-prompt').style.display = 'flex';
 
-document.getElementById('fullscreen-btn').addEventListener('click', () => {
+document.getElementById('enter-fullscreen').addEventListener('click', () => {
   const el = document.documentElement;
-  if (el.requestFullscreen) {
-    el.requestFullscreen();
-  } else if (el.webkitRequestFullscreen) { // Safari
-    el.webkitRequestFullscreen();
-  } else if (el.msRequestFullscreen) { // IE11
-    el.msRequestFullscreen();
+  if (el.requestFullscreen) el.requestFullscreen();
+  else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+  else if (el.msRequestFullscreen) el.msRequestFullscreen();
+
+  document.getElementById('fullscreen-prompt').style.display = 'none';
+});
+
+const toggleBtn = document.getElementById('fullscreen-btn');
+
+toggleBtn.addEventListener('click', () => {
+  if (!document.fullscreenElement) {
+    enterFullscreen(document.documentElement);
+  } else {
+    document.exitFullscreen();
   }
 });
+
+document.addEventListener('fullscreenchange', () => {
+  if (document.fullscreenElement) {
+    toggleBtn.textContent = '关闭全频模式';
+  } else {
+    toggleBtn.textContent = '打开全频模式';
+  }
+});
+
+function enterFullscreen(element) {
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.webkitRequestFullscreen) { // Safari
+    element.webkitRequestFullscreen();
+  } else if (element.msRequestFullscreen) { // IE11
+    element.msRequestFullscreen();
+  } else if (element.mozRequestFullScreen) { // Firefox
+    element.mozRequestFullScreen();
+  }
+}
+
+function exitFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) { // Safari
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) { // IE11
+    document.msExitFullscreen();
+  } else if (document.mozCancelFullScreen) { // Firefox
+    document.mozCancelFullScreen();
+  }
+}
