@@ -59,7 +59,6 @@ function renderCurrentPage(direction = 'none') {
       if (!audioPlayer.paused && audioPlayer.src.includes(page.audio)) {
         audioPlayer.pause();
       } else {
-        // Otherwise, play this page's audio
         audioPlayer.src = page.audio;
         audioPlayer.play();
   }
@@ -86,7 +85,7 @@ function renderCurrentPage(direction = 'none') {
   setTimeout(() => {
     flipping = false;
     const page = pages[currentIndex];
-    if (currentIndex >= 5 && currentIndex <= 19 && page.audio) {
+    if (currentIndex >= 5 && currentIndex <= 20 && page.audio) {
         audioPlayer.src = page.audio;
         audioPlayer.play();
     } else {
@@ -188,3 +187,14 @@ function setupClickZones() {
 }
 
 renderPDF().then(setupClickZones);
+
+document.getElementById('fullscreen-btn').addEventListener('click', () => {
+  const el = document.documentElement;
+  if (el.requestFullscreen) {
+    el.requestFullscreen();
+  } else if (el.webkitRequestFullscreen) { // Safari
+    el.webkitRequestFullscreen();
+  } else if (el.msRequestFullscreen) { // IE11
+    el.msRequestFullscreen();
+  }
+});
