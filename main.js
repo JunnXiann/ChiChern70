@@ -121,18 +121,6 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-let touchStartX = 0;
-let touchEndX = 0;
-
-container.addEventListener('touchstart', e => {
-  touchStartX = e.changedTouches[0].screenX;
-});
-
-container.addEventListener('touchend', e => {
-  touchEndX = e.changedTouches[0].screenX;
-  handleSwipe();
-});
-
 container.addEventListener('click', (e) => {
   const rect = container.getBoundingClientRect();
   const x = e.clientX - rect.left;
