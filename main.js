@@ -96,7 +96,7 @@ function renderCurrentPage(direction = 'none') {
   setTimeout(() => {
     flipping = false;
     const page = pages[currentIndex];
-    if (currentIndex >= 5 && currentIndex <= 20 && page.audio) {
+    if (currentIndex >= 6 && currentIndex <= 21 && page.audio) {
         audioPlayer.src = page.audio;
         audioPlayer.play();
         soundImg.classList.add('playing');
