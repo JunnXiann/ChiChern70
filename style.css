@@ -34,6 +34,20 @@ body {
   }
 }
 
+.sound-icon {
+  width: 110px;
+  height: 110px;
+  transition: transform 0.2s;
+}
+
+.sound-icon.playing {
+  animation: rotateMusic 25s linear infinite;
+}
+
+@keyframes rotateMusic {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
 
 #flipbook-container {
   width: 77vw;
@@ -74,7 +88,7 @@ body {
   right: 10px;
   font-size: 20px;
   padding: 5px 10px;
-  background-color: #fffa;
+  background-color: transparent;
   border: none;
   border-radius: 8px;
   cursor: pointer;

@@ -50,21 +50,32 @@ function renderCurrentPage(direction = 'none') {
 
   wrapper.appendChild(img);
 
-  if (currentIndex >= 5 && currentIndex <= 20) {
+  const soundImg = document.createElement('img');
+  soundImg.src = 'SoundPlay.png';
+  soundImg.className = 'sound-icon';
+
+  if (currentIndex >= 6 && currentIndex <= 21) {
     const soundBtn = document.createElement('button');
     soundBtn.className = 'sound-button';
-    soundBtn.innerText = '🎵';
+    soundBtn.appendChild(soundImg);
     soundBtn.onclick = (e) => {
       e.stopPropagation();
+
       if (!audioPlayer.paused && audioPlayer.src.includes(page.audio)) {
         audioPlayer.pause();
+        soundImg.classList.remove('playing');
       } else {
         audioPlayer.src = page.audio;
         audioPlayer.play();
+        soundImg.classList.add('playing');
   }
     };
     wrapper.appendChild(soundBtn);
   }
+
+  audioPlayer.addEventListener('ended', () => {
+    soundImg.classList.remove('playing');
+  });
 
   // clear previous and add new
   container.innerHTML = '';
@@ -88,9 +99,11 @@ function renderCurrentPage(direction = 'none') {
     if (currentIndex >= 5 && currentIndex <= 20 && page.audio) {
         audioPlayer.src = page.audio;
         audioPlayer.play();
+        soundImg.classList.add('playing');
     } else {
         // Stop audio when out of range
         audioPlayer.pause();
+        soundImg.classList.remove('playing');
         audioPlayer.src = '';
     }
   }, 600); // match your transition duration
