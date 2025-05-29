@@ -75,6 +75,10 @@ function renderCurrentPage(direction = 'none') {
 
   audioPlayer.addEventListener('ended', () => {
     soundImg.classList.remove('playing');
+    if (currentIndex >= 6 && currentIndex <= 20 && currentIndex < pages.length - 1) {
+      currentIndex++;
+      renderCurrentPage('left');
+    }
   });
 
   // clear previous and add new
