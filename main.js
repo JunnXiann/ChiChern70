@@ -51,7 +51,7 @@ function renderCurrentPage(direction = 'none') {
   wrapper.appendChild(img);
 
   const soundImg = document.createElement('img');
-  soundImg.src = 'SoundPlay.png';
+  soundImg.src = 'images/SoundPlay.png';
   soundImg.className = 'sound-icon';
 
   if (currentIndex >= 6 && currentIndex <= 21) {
