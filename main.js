@@ -73,14 +73,6 @@ function renderCurrentPage(direction = 'none') {
     wrapper.appendChild(soundBtn);
   }
 
-  audioPlayer.addEventListener('ended', () => {
-    soundImg.classList.remove('playing');
-    if (currentIndex >= 6 && currentIndex <= 20 && currentIndex < pages.length - 1) {
-      currentIndex++;
-      renderCurrentPage('left');
-    }
-  });
-
   // clear previous and add new
   container.innerHTML = '';
   container.appendChild(wrapper);
@@ -112,6 +104,16 @@ function renderCurrentPage(direction = 'none') {
     }
   }, 600); // match your transition duration
 }
+
+audioPlayer.addEventListener('ended', () => {
+  if (currentIndex >= 6 && currentIndex <= 20 && currentIndex < pages.length - 1) {
+    currentIndex++;
+    renderCurrentPage('left');
+  } else {
+    const icon = document.querySelector('.sound-icon.playing');
+    if (icon) icon.classList.remove('playing');
+  }
+});
 
 function nextPage() {
   if (currentIndex < pages.length - 1) {
